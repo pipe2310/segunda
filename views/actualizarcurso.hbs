@@ -1,0 +1,21 @@
+{{>header}}
+<form action="/calculos4" method="post"><br>
+	Id Curso: <input type="number" name="id" required="required" ><br>
+	Estado:<input type="text" name="estado"><br>
+	<button>Actualizar</button><br><br><br>
+</form>
+<table>
+<tr>
+<th>Identificador del Curso</th>
+<th>Nombre</th>
+<th>Descripcion</th>
+<th>Valor</th>
+<th>Modalidad</th>
+<th>Intensidad</th>
+<th>Estado</th>
+</tr>
+{{mostrar}}
+
+</table>
+
+{{>footer}}

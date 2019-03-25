@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<body>
+{{>header}}
+<!--<p>Click the Start button to output "Hello" after 2 seconds.</p>
+
+<p>In this example, we also output the parameters that were passed to the alertFunc() function.</p>
+
+<button onclick="myStartFunction()">Start</button>
+
+<p ></p>--->
+<center><h2>Listado de cursos disponibles</h2></center>
+<table id="demo" class="table table-striped">
+<tr>
+<th>Identificador del Curso</th>
+<th>Nombre</th>
+<th>Duracion</th>
+<th>Valor</th>
+
+</tr>
+</table>
+<center><h1>Registro de Aspirantes</h1></center>
+<div class="container">
+  <form class="form-horizontal" action="/calculos7" method="post">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="id">Identificador del curso:</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" placeholder="Ingrese Identificador del curso" name="id" required="required">
+      </div>
+    </div>
+       <div class="form-group">
+      <label class="control-label col-sm-2" for="id">Cedula:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Ingrese cedula" name="cedula" required="required">
+      </div>
+    </div>
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="id">Nombre:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Ingrese nombre" name="nombre" required="required">
+      </div>
+    </div>
+
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+       <center> <button type="submit" class="btn btn-default">Guardar</button></center>
+      </div>
+    </div>
+  </form>
+</div>
+<p id="demo2" style="color:red;"></p>
+
+<script>
+var myVar;
+let cursos =[ {
+Id: 101,
+Nombre: 'Fundamentos de programacion en java',
+Duracion: 60,
+Valor: 200000
+
+},
+{
+
+Id: 202,
+Nombre: 'Fundamentos de programacion en C#',
+Duracion: 50,
+Valor: 250000
+},
+
+{
+
+Id: 303,
+Nombre: 'Fundamentos de programacion en C++',
+Duracion: 40,
+Valor: 275000
+
+}];
+setTimeout(function(){
+	document.getElementById("demo").innerHTML +='<tr>'+'<td>'+cursos[0].Id+'</td>'+' <td> '+cursos[0].Nombre+' </td> '+' <td> '+cursos[0].Duracion+' </td> '+'<td>'+cursos[0].Valor+'</td>'+'</tr>';
+},2000);
+setTimeout(function(){
+	document.getElementById("demo").innerHTML +='<tr>'+'<td>'+cursos[1].Id+'</td>'+' <td> '+cursos[1].Nombre+' </td> '+' <td> '+cursos[1].Duracion+' </td> '+'<td>'+cursos[1].Valor+'</td>'+'</tr>';
+},4000);
+setTimeout(function(){
+	document.getElementById("demo").innerHTML +='<tr>'+'<td>'+cursos[2].Id+'</td>'+' <td> '+cursos[2].Nombre+' </td> '+' <td> '+cursos[2].Duracion+' </td> '+'<td>'+cursos[2].Valor+'</td>'+'</tr>';
+},6000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+{{>header}}
+<center><h1>Registro de cursos</h1></center>
+<div class="container">
+<form action="/calculos" method="post">
+  <div class="form-group">
+    <label for="id">Identificador Del Curso:</label>
+    <input type="number" class="form-control" name="id" required="required">
+  </div>
+  <div class="form-group">
+    <label for="nombre">Nombre:</label>
+    <input type="text" class="form-control" name="nombre">
+  </div>
+   <div class="form-group">
+    <label for="descripcion">Descripcion:</label>
+    <input type="text" class="form-control" name="descripcion">
+  </div>
+   <div class="form-group">
+    <label for="pwd">Valor:</label>
+    <input type="number" class="form-control" name="valor">
+  </div>
+    <div class="form-group">
+    <label for="modalidad">Modalidad:</label>
+    <input type="text" class="form-control" name="modalidad">
+  </div>
+    <div class="form-group">
+    <label for="intensidad">Intensidad Horaria:</label>
+    <input type="number" class="form-control" name="intensidad">
+  </div>
+    <div class="form-group">
+    <label for="estado">Estado:</label>
+    <input type="text" class="form-control" name="estado">
+  </div>
+
+  <center><button type="submit" class="btn btn-default">Guardar</button></center>
+
+</form>
+</div>	
+<!---<form action="/calculos" method="post"><br>
+	Id Curso: <input type="number" name="id" required="required" ><br>
+	Nombre: <input type="text" name="nombre" required="required" ><br>
+	Descripcion: <input type="text" name="descripcion" required="required" ><br>
+	Valor: <input type="number" name="valor" required="required" ><br>
+	Modalidad: <input type="text" name="modalidad"><br>
+	Intensidad horaria:<input type="number" name="intensidad"><br>
+	Estado:<input type="text" name="estado"><br>
+	<button>Guardar</button><br><br><br>
+</form>--->
+
+<!---<form action="/calculos4" method="post"><br>
+	Id Curso: <input type="number" name="id" required="required" ><br>
+	Estado:<input type="text" name="estado"><br>
+	<button>Actualizar</button><br><br><br>
+</form>--->
+<br>
+<table class="table table-striped">
+<tr>
+<th>Identificador del Curso</th>
+<th>Nombre</th>
+<th>Descripcion</th>
+<th>Valor</th>
+<th>Modalidad</th>
+<th>Intensidad</th>
+<th>Estado</th>
+</tr>
+{{mostrar}}
+
+</table>
+<center><h1>Actualizacion estado del curso</h1></center>
+<div class="container">
+<form action="/calculos4" method="post">
+  <div class="form-group">
+    <label for="id">Identificador Del Curso:</label>
+    <input type="number" class="form-control" name="id" required="required">
+  </div>
+  <div class="form-group">
+    <label for="estado">Estado:</label>
+    <input type="text" class="form-control" name="estado">
+  </div>
+
+  <center><button type="submit" class="btn btn-default">Actualizar</button></center>
+
+</form>
+</div>	
+
+<br>
+<table class="table table-striped">
+<tr>
+<th>Identificador del Curso</th>
+<th>Documento</th>
+</tr>
+{{mostrarmatcursos}}
+
+</table>
+
+<center><h1>Eliminacion de matriculas</h1></center>
+<div class="container">
+<form action="/calculos6" method="post">
+  <div class="form-group">
+    <label for="identificador">Identificador Del Curso:</label>
+    <input type="number" class="form-control" name="identificador" required="required">
+  </div>
+  <div class="form-group">
+    <label for="estado">Documento De Identidad:</label>
+    <input type="number" class="form-control" name="documento">
+  </div>
+
+  <center><button type="submit" class="btn btn-default">Eliminar</button></center>
+
+</form>
+</div>	
+<!---<form action="/calculos6" method="post"><br>
+	Identificador Del Curso: <input type="number" name="identificador" required="required" ><br>
+	Documento De Identidad:<input type="text" name="documento"><br>
+	<button>Eliminar Matricula</button><br><br><br>
+</form>--->
+{{>footer}}
