@@ -123,11 +123,4 @@ app.get('*',(req,res)=>{
 	})
 })
 
-app.listen(3000,()=>{
-console.log('escuchando en el puerto 3000')
 
-});
-
-server.connection({
-    port: (process.env.PORT || 1643)
-});
