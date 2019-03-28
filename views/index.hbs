@@ -1,12 +1,12 @@
 {{>header}}
 
-Ingrese el Identificador del curso de su interes para ver mas informacion
+<!---Ingrese el Identificador del curso de su interes para ver mas informacion
 <div class="container">
   <form class="form-horizontal" action="/calculos5" method="post">
     <div class="form-group">
       <label class="control-label col-sm-2" for="email">Identificador Del Curso:</label>
       <div class="col-sm-10">
-        <input type="number" class="form-control" id="email" placeholder="Ingrese identificador del curso" name="id">
+        <input type="number" class="form-control" id="email" placeholder="Ingrese identificador del curso" name="id" required="required">
       </div>
     </div>
 
@@ -16,14 +16,15 @@ Ingrese el Identificador del curso de su interes para ver mas informacion
       </div>
     </div>
   </form>
-</div>
+</div>--->
 
 <!---<form action="/calculos5" method="post"><br>
 	Identificador Del Curso: <input type="number" name="id" required="required" ><br>
 	<button>Ver mas</button><br><br><br>
 </form>--->
+<h1>Ver cursos como interesado</h1>
 <h2>Cursos de educacion continua disponibles</h2>
-<table class="table table-striped">
+<!---<table class="table table-striped">
 	<thead>
 <tr>
 <th>Identificador del Curso</th>
@@ -36,7 +37,7 @@ Ingrese el Identificador del curso de su interes para ver mas informacion
 <tbody>
 {{mostrarcursosdisponibles}}
 </tbody>
-</table>
+</table>--->
 <br>
-
+{{mostrarcursosdisponiblesvermas2}}
 {{>footer}}

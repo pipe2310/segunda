@@ -7,7 +7,12 @@ require('./helpers');
 
 const directoriopublico = path.join(__dirname, '../public')
 const directoiopartial= path.join(__dirname, '../partials')
+const dirNode_modules = path.join(__dirname,'../node_modules')
 app.use(express.static(directoriopublico));
+app.use('/css',express.static(dirNode_modules+'/bootstrap/dist/css'));
+app.use('/js',express.static(dirNode_modules+'/jquery/dist'));
+app.use('/js',express.static(dirNode_modules+'/popper.js/dist'));
+app.use('/js',express.static(dirNode_modules+'/bootstrap/dist/js'));
 hbs.registerPartials(directoiopartial);
 app.use(bodyParser.urlencoded({extended:false}));
 
@@ -57,7 +62,7 @@ app.post('/calculos',(req,res)=>{
 		valor: parseInt(req.body.valor),
 		modalidad: req.body.modalidad,
 		intensidad: req.body.intensidad,
-		estado: 'disponible'
+		estado: 'Disponible'
 	});
 });
 

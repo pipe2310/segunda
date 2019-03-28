@@ -4,32 +4,38 @@
 <form action="/calculos" method="post">
   <div class="form-group">
     <label for="id">Identificador Del Curso:</label>
-    <input type="number" class="form-control" name="id" required="required">
+    <input type="number" class="form-control" name="id" required="required" placeholder="Ingrese el identificador del curso">
   </div>
   <div class="form-group">
     <label for="nombre">Nombre:</label>
-    <input type="text" class="form-control" name="nombre">
+    <input type="text" class="form-control" name="nombre" required="required" placeholder="Ingrese el nombre del curso">
   </div>
    <div class="form-group">
     <label for="descripcion">Descripcion:</label>
-    <input type="text" class="form-control" name="descripcion">
+    <!---<input type="text" class="form-control" name="descripcion" required="required" placeholder="Ingrese una breve descripcion del curso">--->
+    <textarea type="text" name="descripcion"  class="form-control" required="required" placeholder="Ingrese una breve descripcion del curso"></textarea>
   </div>
    <div class="form-group">
     <label for="pwd">Valor:</label>
-    <input type="number" class="form-control" name="valor">
+    <input type="number" class="form-control" name="valor" required="required" placeholder="Ingrese el valor del curso">
   </div>
     <div class="form-group">
     <label for="modalidad">Modalidad:</label>
-    <input type="text" class="form-control" name="modalidad">
+   <!--- <input type="text" class="form-control" name="modalidad" placeholder="Ingrese la modalidad del curso">--->
+    <select name="modalidad" class="form-control" >  
+    <option value="">-</option> 
+   <option value="Virtual">Virtual</option> 
+   <option value="Presencial">Presencial</option> 
+</select>
   </div>
     <div class="form-group">
     <label for="intensidad">Intensidad Horaria:</label>
-    <input type="number" class="form-control" name="intensidad">
+    <input type="number" class="form-control" name="intensidad" placeholder="Ingrese la intensidad horaria del curso">
   </div>
-    <div class="form-group">
+    <!---<div class="form-group">
     <label for="estado">Estado:</label>
-    <input type="text" class="form-control" name="estado">
-  </div>
+    <input type="text" class="form-control" name="estado" placeholder="Ingrese el estado del curso">
+  </div>--->
 
   <center><button type="submit" class="btn btn-default">Guardar</button></center>
 
@@ -51,6 +57,7 @@
 	Estado:<input type="text" name="estado"><br>
 	<button>Actualizar</button><br><br><br>
 </form>--->
+<h1>Ver Cursos Como Administrador</h1>
 <br>
 <table class="table table-striped">
 <tr>
@@ -69,12 +76,19 @@
 <div class="container">
 <form action="/calculos4" method="post">
   <div class="form-group">
-    <label for="id">Identificador Del Curso:</label>
-    <input type="number" class="form-control" name="id" required="required">
+    <label for="id">Curso</label>
+   <!--- <input type="number" class="form-control" name="id" required="required" placeholder="Ingrese el identificador del curso">--->
+<select name="id" class="form-control" > 
+    {{mostrarcursosnombre}}
+    </select>
   </div>
   <div class="form-group">
     <label for="estado">Estado:</label>
-    <input type="text" class="form-control" name="estado">
+    <select name="estado" class="form-control" >  
+   <option value="Cerrado">Cerrado</option> 
+   <option value="Disponible">Disponible</option> 
+    </select>
+    <!---<input type="text" class="form-control" name="estado" placeholder="Ingrese el estado">--->
   </div>
 
   <center><button type="submit" class="btn btn-default">Actualizar</button></center>
@@ -83,25 +97,32 @@
 </div>	
 
 <br>
-<table class="table table-striped">
+<center><h1>Estudiantes Matriculados</h1></center>
+<!---<table class="table table-striped">
 <tr>
 <th>Identificador del Curso</th>
 <th>Documento</th>
 </tr>
 {{mostrarmatcursos}}
 
-</table>
+
+</table>--->
+
+{{mostrarmatcursos2}}
 
 <center><h1>Eliminacion de matriculas</h1></center>
 <div class="container">
 <form action="/calculos6" method="post">
   <div class="form-group">
-    <label for="identificador">Identificador Del Curso:</label>
-    <input type="number" class="form-control" name="identificador" required="required">
+    <label for="identificador">Curso:</label>
+    <!---<input type="number" class="form-control" name="identificador" required="required" placeholder="Ingrese el identificador del curso">--->
+    <select name="identificador" class="form-control" > 
+    {{mostrarcursosnombre}}
+    </select>
   </div>
   <div class="form-group">
     <label for="estado">Documento De Identidad:</label>
-    <input type="number" class="form-control" name="documento">
+    <input type="number" class="form-control" name="documento" required="required" placeholder="Ingrese el documento de identidad">
   </div>
 
   <center><button type="submit" class="btn btn-default">Eliminar</button></center>

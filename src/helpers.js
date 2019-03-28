@@ -112,6 +112,11 @@ const mostrar =()=>{
 hbs.registerHelper('crear',(id,nombre,descripcion,valor,modalidad,intensidad, estado)=>{
 	listar();
 	let mesaje;
+	/*if(modalidad==',Virtual')
+		modalidad='Virtual';
+	else
+		modalidad='Presencial'*/
+
 	let cur ={
 		id: id,
 		nombre: nombre,
@@ -126,11 +131,11 @@ hbs.registerHelper('crear',(id,nombre,descripcion,valor,modalidad,intensidad, es
 	listaCursos.push(cur);
 	console.log(listaCursos);
 	guardar();
-	mensaje='Guardado correctamente';
+	mensaje='Curso '+nombre+' creado correctamente';
 	}
 	else{
-		console.log('Ya existe otro curso con ese id');
-		mensaje='Ya existe otro curso con ese id';
+		console.log('Ya existe otro curso con el identificador ingresado');
+		mensaje='Ya existe otro curso con el identificador ingresado';
 	}
 	return mensaje;
 })
@@ -185,7 +190,8 @@ hbs.registerHelper('crearmat',(identificador,documento)=>{
 	listaMatriculas.push(mat);
 	console.log(listaMatriculas);
 	guardarMat();
-	mensaje='Se ha matriculado al curso'+identificador+'satisfactoriamente';
+	let encontrado = listaCursos.find(buscar => buscar.id== identificador); 
+	mensaje='Se ha matriculado satisfactoriamente al curso '+ encontrado.nombre+' el cual tiene un valor de '+ encontrado.valor;
 }	
 	else{
 		console.log('Ya existe otra matricula con ese id');
@@ -193,9 +199,13 @@ hbs.registerHelper('crearmat',(identificador,documento)=>{
 	}
 
 	}
+	if(!encontradoo){
+	mensaje='Se debe registrar previamente como aspirante'
+	}
 	return mensaje
 })
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 ///////////////////////////////////////////MOSTRAR LOS CURSOS//////////////////////////////////////////////////////////////
 hbs.registerHelper('mostrar',()=>{
@@ -240,7 +250,7 @@ var out = "";
 		console.log(' nombre '+ curso.nombre)
 		console.log(' descripcion '+ curso.descripcion)
 		console.log(' valor '+ curso.valor+ '\n')
-if(curso.estado=='disponible'){
+if(curso.estado=='Disponible'){
     out = out +"<tr>"+ "<td>" + curso.id + "</td>"+'\n'+"<td>" + curso.nombre + "</td>"+'\n'+"<td>" + curso.valor +"</std>" + "<tr>";
 }
 		//string =string+' '+curso.id;
@@ -257,7 +267,7 @@ if(curso.estado=='disponible'){
 hbs.registerHelper('mostrarcursosdisponiblesvermas',(id)=>{
 let string ;
 var out='';
-var no='No se encontro un curso con el identificador indicado';
+var no='No se encontro un curso con el identificador ingresado';
 var sw=false;
 		listar()
 
@@ -267,7 +277,7 @@ var sw=false;
 		console.log(' nombre '+ curso.nombre)
 		console.log(' descripcion '+ curso.descripcion)
 		console.log(' valor '+ curso.valor+ '\n')
-if(curso.id==id && curso.estado=='disponible' ){
+if(curso.id==id && curso.estado=='Disponible' ){
 	if(sw==false){
 		out=out+'<tr> <th>Identificador del Curso</th> <th>Nombre</th> <th>Descripcion</th><th>Valor</th> <th>Modalidad</th> <th>Intensidad</th> </tr>';
 		sw=true;
@@ -288,6 +298,101 @@ return no
 }
 })
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////MOSTRAR NOMBRE DE LOS CURSOS DISPONIBLES//////////////////////////////////////////////////////////////
+hbs.registerHelper('mostrarcursosnombre',()=>{
+let string ;
+var out='<option value="">-</option> ';
+
+
+		listar()
+ 
+	listaCursos.forEach(curso=>{
+
+  out= out+` 
+   <option value="${curso.id}" >${curso.nombre}</option> 
+    `
+
+	})
+
+  return new hbs.SafeString(
+    out 
+  );
+
+})
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////MOSTRAR NOMBRE DE LOS CURSOS DISPONIBLES//////////////////////////////////////////////////////////////
+hbs.registerHelper('mostrarcursosnombre2',()=>{
+let string ;
+var out='<option value="">-</option> ';
+
+
+		listar()
+ 
+	listaCursos.forEach(curso=>{
+if(curso.estado=="Disponible"){
+  out= out+` 
+   <option value="${curso.id}" >${curso.nombre}</option> 
+    `
+}
+	})
+
+  return new hbs.SafeString(
+    out 
+  );
+
+})
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////MOSTRAR LOS CURSOS DISPONIBLES VER MAS2//////////////////////////////////////////////////////////////
+hbs.registerHelper('mostrarcursosdisponiblesvermas2',()=>{
+let string ;
+var out='<div class="accordion" id="accordionExample"> <div class="row">';
+var no='No se encontro un curso con el identificador ingresado';
+var sw=false;
+		listar()
+		i=1;
+	listaCursos.forEach(curso=>{
+if(curso.estado=='Disponible' ){
+
+    out = out +
+   `
+<div class=".cols-sm-12 .cols-md-4 .cols-lg-12" >
+  <div class="card" >
+    <div class="card-header" id="heading${i}" >
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
+          Identificador del curso: ${curso.id}<br>
+          Nombre: ${curso.nombre}<br>
+          Valor: ${curso.valor}<br><br>
+          Ver Mas
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapse${i}" class="collapse" aria-labelledby="heading${i}" data-parent="#accordionExample">
+      <div class="card-body">
+        Descripcion: ${curso.descripcion}<br>
+        Modalidad: ${curso.modalidad}<br>
+        Intensidad: ${curso.intensidad}
+      </div>
+    </div>
+ </div>
+</div>
+
+ 
+   `
+
+}
+		//string =string+' '+curso.id;
+i=i+1;
+	})
+out=out+'</div> </div>  ';
+  return new hbs.SafeString(
+    out 
+  );
+
+})
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////MOSTRAR LOS CURSOS DISPONIBLES VER MAS//////////////////////////////////////////////////////////////
 hbs.registerHelper('mostrarcursosdisponiblesvermasno',()=>{
@@ -304,7 +409,7 @@ var out = "";
 		console.log(' nombre '+ curso.nombre)
 		console.log(' descripcion '+ curso.descripcion)
 		console.log(' valor '+ curso.valor+ '\n')
-if(curso.estado=='disponible' ){
+if(curso.estado=='Disponible' ){
     out = out +"<tr>"+ "<td>" + curso.id + "</td>"+'\n'+"<td>" + curso.nombre + "</td>"+'\n'+"<td>" + curso.descripcion + "</td>"+'\n'+"<td>" + curso.valor + "</td>"+"<td>" + curso.modalidad + "</td>"	+"<td>" + curso.intensidad + "</td>"+"<tr>";
 }
 		//string =string+' '+curso.id;
@@ -353,19 +458,156 @@ var out = "";
 		listarMat()
 		listar()
 	console.log('Notas de los estudiantes')
-
-
-
+	listaMatriculas.sort();
+	console.log('hola '+listaMatriculas)
+//MyData.sort(dynamicSort("name"));
 	listaMatriculas.forEach(mat=>{
 		//id: curso.id;
 		console.log(mat.identificador);
 		console.log(mat.documento)
 
-    out = out +"<tr>"+ "<td>" + mat.identificador + "</td>"+'\n'+"<td>" + mat.documento +"</td>"+"<tr>";
+    out = out +"<tr>"+ "<td>" + mat.identificador + "</td>"+'\n'+'<td> ' + mat.documento +"</td>"+"<tr>";/*+"<td>"+'<button type="button" name="'+mat.identificador+'">Eliminar </button>'+"</td>"*/
 
 		//string =string+' '+curso.id;
 
 	})
+  return new hbs.SafeString(
+    out 
+  );
+
+})
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////MOSTRAR LAS MATRICULAS//////////////////////////////////////////////////////////////
+hbs.registerHelper('mostrarmatcursos2',()=>{
+let string ;
+var out = '<div class="accordion" id="accordionExample"> <div class="row">';
+listarAsp()
+listarMat()
+listar()
+i=1;
+let sw;
+listaCursos.forEach(cur=>{
+sw=false;
+out=out+   `
+<div class=".cols-sm-12 .cols-md-4 .cols-lg-12" >
+   <div class="card" >
+    <div class="card-header" id="heading${i}" >
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
+          Identificador del curso: ${cur.id}<br>
+          Nombre: ${cur.nombre}<br><br>
+        
+          Ver Matriculas
+        </button>
+      </h2>
+    </div>
+     <div id="collapse${i}" class="collapse" aria-labelledby="heading${i}" data-parent="#accordionExample">
+      <div class="card-body"> 
+      <table>
+
+      `
+listaMatriculas.forEach(mat=>{
+encontradoo =listaAspirantes.find(id=>id.id==mat.documento)
+if(sw==false && cur.id==mat.identificador){
+	
+    out=out+ ` <thead>
+      <tr>
+      	<td>Documento</td>
+      	<td>Nombre</td>
+      	<td>Correo</td>
+      	<td>Telefono</td>
+      </tr>
+      </thead>`
+      sw=true;
+}
+if(cur.id==mat.identificador){
+    out=out+`<tr>
+    <td>${encontradoo.id}</td>
+    	<td>${encontradoo.nombre}</td>
+    	<td>${encontradoo.correo}</td>
+    	<td>${encontradoo.telefono}</td>
+    	</tr>
+   `
+}
+
+	})
+out=out+ `</table></div></div></div></div>
+   		`
+i=i+1;
+	})
+	out=out+  `
+   		</div></div>`
+
+  return new hbs.SafeString(
+    out 
+  );
+
+})
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////MOSTRAR LAS MATRICULAS//////////////////////////////////////////////////////////////
+hbs.registerHelper('mostrarmatcursos3',(identificador,documento)=>{
+let string ;
+var out = '<div class="accordion" id="accordionExample"> <div class="row">';
+listarAsp()
+listarMat()
+listar()
+i=1;
+let sw;
+listaCursos.forEach(cur=>{
+sw=false;
+	if(cur.id==identificador){
+out=out+   `
+<div class=".cols-sm-12 .cols-md-4 .cols-lg-12" >
+   <div class="card" >
+    <div class="card-header" id="heading${i}" >
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
+          Identificador del curso: ${cur.id}<br>
+          Nombre: ${cur.nombre}<br>
+    
+
+        </button>
+      </h2>
+    </div>
+     <div id="collapse${i}" class="collapse show" aria-labelledby="heading${i}" data-parent="#accordionExample">
+      <div class="card-body"> 
+      <table>
+
+      `
+listaMatriculas.forEach(mat=>{
+if( mat.documento!=documento){
+encontradoo =listaAspirantes.find(id=>id.id==mat.documento)
+if(sw==false && cur.id==mat.identificador){
+	
+    out=out+ ` <thead>
+      <tr>
+      	<td>Documento</td>
+      	<td>Nombre</td>
+      	<td>Correo</td>
+      	<td>Telefono</td>
+      </tr>
+      </thead>`
+      sw=true;
+}
+if(cur.id==mat.identificador){
+    out=out+`<tr>
+    <td>${encontradoo.id}</td>
+    	<td>${encontradoo.nombre}</td>
+    	<td>${encontradoo.correo}</td>
+    	<td>${encontradoo.telefono}</td>
+    	</tr>
+   `
+}
+}
+	})
+out=out+ `</table></div></div></div></div>
+   		`
+i=i+1;
+}
+	})
+	out=out+  `
+   		</div></div>`
+
   return new hbs.SafeString(
     out 
   );
@@ -411,17 +653,21 @@ hbs.registerHelper('listar',()=>{
 })
 
 hbs.registerHelper('actualizar',(id,estado)=>{
-
+let out;
 	listar()
 	let encontrado = listaCursos.find(buscar => buscar.id== id)
 	if(!encontrado){
 console.log('Estudiante no existe')
+out="Identificador del curso no encontrado";
 	}
 	else{
 		encontrado.estado= estado;
 		guardar()
+		out="Estado del curso actualizado correctamente";
 	}
-
+  return new hbs.SafeString(
+    out 
+  );
 })
 
 
@@ -442,6 +688,7 @@ hbs.registerHelper('eliminarr',(identificador,documento)=>{
 listarMat()
 let sw=false;
 let sww=false;
+let mensaje;
 listaMatriculass= [];
 	listaMatriculas.forEach(mat=>{
 		if(mat.identificador==identificador && mat.documento==documento){
@@ -463,6 +710,12 @@ listaMatriculass= [];
 		listaMatriculas=listaMatriculass
 		guardarMat()
 		}
+		if(sw==true){
+			mensaje='Eliminado correctamente'
+		}else{
+			mensaje='No se encontro el documento en la matriculas del curso'
+		}
+		return mensaje;
 })
 
 hbs.registerHelper('eliminar',(identificador,documento)=>{
@@ -518,3 +771,20 @@ let mensaje;
 	})
 return mensaje;
 })
+
+function dynamicSort(property) {
+    var sortOrder = 1;
+
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+
+    return function (a,b) {
+        if(sortOrder == -1){
+            return b[property].localeCompare(a[property]);
+        }else{
+            return a[property].localeCompare(b[property]);
+        }        
+    }
+}

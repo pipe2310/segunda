@@ -1,7 +1,20 @@
 {{>header}}
-<p>
-	bienvenido a la pagina de promedio estudiante
-</p>
 
-<p> {{crear id estudiante descripcion valor modalidad intensidad estado}}</p>
+
+<center><h1> {{crear id estudiante descripcion valor modalidad intensidad estado}}</h1></center>
+A continuacion se presenta la lista de cursos creados hasta el momento<br><br>
+<table class="table table-striped">
+<tr>
+<th>Identificador del Curso</th>
+<th>Nombre</th>
+<th>Descripcion</th>
+<th>Valor</th>
+<th>Modalidad</th>
+<th>Intensidad</th>
+<th>Estado</th>
+</tr>
+{{mostrar}}
+
+</table>
+<center><a href="/Aspirante">Volver</a></center>
 {{>footer}}

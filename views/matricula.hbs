@@ -5,16 +5,24 @@
 <button>Guardar</button><br><br><br>
 </form>--->
 
-<center><h1>Matriculas</h1></center>
+<center><h1>Registro de matricula</h1></center>
 <div class="container">
 <form action="/calculos3" method="post">
-  <div class="form-group">
+ <!--- <div class="form-group">
     <label for="identificador">Identificador Del Curso:</label>
-    <input type="number" class="form-control" name="identificador" required="required">
+    <input type="number" class="form-control" name="identificador" required="required" placeholder="Ingrese el identificador del curso">
+
+  </div>--->
+    <div class="form-group">
+    <label for="identificador">Curso:</label>
+    <!---<input type="number" class="form-control" name="identificador" required="required" placeholder="Ingrese el identificador del curso">--->
+    <select name="identificador" class="form-control" > 
+    {{mostrarcursosnombre2}}
+    </select>
   </div>
   <div class="form-group">
     <label for="estado">Documento De Identidad:</label>
-    <input type="number" class="form-control" name="documento" required="required">
+    <input type="number" class="form-control" name="documento" required="required" placeholder="Ingrese su documento de identidad">
   </div>
 
   <center><button type="submit" class="btn btn-default">Guardar</button></center>
@@ -22,6 +30,8 @@
 </form>
 </div>	
 <br>
+{{mostrarcursosdisponiblesvermas2}}
+<!---
 <table class="table table-striped">
 <tr>
 <th>Identificador del Curso</th>
@@ -33,5 +43,5 @@
 </tr>
 {{mostrarcursosdisponiblesvermasno}}
 
-</table>
+</table>--->
 {{>footer}}
