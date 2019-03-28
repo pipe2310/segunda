@@ -122,9 +122,9 @@ app.get('*',(req,res)=>{
 		estudiante: 'error'
 	})
 })
+const PORT = process.env.PORT || config.httpPort;
 
-app.listen(3000,()=>{
-console.log('escuchando en el puerto 3000')
+app.listen(PORT, ...)
+	   
 
-});
 
