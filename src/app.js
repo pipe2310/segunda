@@ -127,4 +127,6 @@ const PORT = process.env.PORT || config.httpPort;
 app.listen(PORT, ...)
 	   
 
-
+server.connection({
+    port: (process.env.PORT || 1643)
+});
