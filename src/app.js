@@ -1,3 +1,4 @@
+var PORT = process.env.PORT || 3000;
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -124,7 +125,7 @@ app.get('*',(req,res)=>{
 })
 
 
-app.listen(3000,()=>{
+app.listen(PORT,()=>{
 console.log('escuchando en el puerto 3000')
 
 });
